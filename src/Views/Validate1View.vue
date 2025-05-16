@@ -21,9 +21,6 @@
         return true;
     }
 
-    
-    
-       
 </script>
 <template>
     <h1>

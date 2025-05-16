@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
+</script>
+
+import { validate } from 'vee-validate';
 <!-- BeautifulNavbar.vue -->
 <template>
     <header class="relative">
@@ -16,14 +22,31 @@
             <!-- Desktop links ----------------------------------------->
             <ul class="hidden sm:flex items-center space-x-6">
                 <li class="relative">
-                  <a href="/"
-                     class="text-sm text-white hover:text-white/80
+                    <RouterLink to="/" class="text-sm text-white hover:text-white/80
                             after:absolute after:-bottom-1 after:left-0
                             after:h-0.5 after:w-full after:bg-white/50
                             after:transition-all after:duration-300
                             hover:after:h-full">
-                    Home
-                  </a>
+                    validate 1
+                </RouterLink>
+                </li>
+                <li class="relative">
+                  <RouterLink to="/validate2" class="text-sm text-white hover:text-white/80
+                            after:absolute after:-bottom-1 after:left-0
+                            after:h-0.5 after:w-full after:bg-white/50
+                            after:transition-all after:duration-300
+                            hover:after:h-full">
+                    validate 2
+                </RouterLink>
+                </li>
+                <li class="relative">
+                    <RouterLink to="/validate3" class="text-sm text-white hover:text-white/80
+                            after:absolute after:-bottom-1 after:left-0
+                            after:h-0.5 after:w-full after:bg-white/50
+                            after:transition-all after:duration-300
+                            hover:after:h-full">
+                        validate 3
+                    </RouterLink>
                 </li>
             </ul>
           </div>
