@@ -1,10 +1,3 @@
-<script setup lang="ts">
-import { RouterLink } from 'vue-router';
-
-</script>
-
-import { validate } from 'vee-validate';
-<!-- BeautifulNavbar.vue -->
 <template>
     <header class="relative">
       <!-- transparant glasbalk met zachte gradient -->
@@ -22,32 +15,77 @@ import { validate } from 'vee-validate';
             <!-- Desktop links ----------------------------------------->
             <ul class="hidden sm:flex items-center space-x-6">
                 <li class="relative">
-                    <RouterLink to="/" class="text-sm text-white hover:text-white/80
+                    <router-link to="/" class="text-sm text-white hover:text-white/80
                             after:absolute after:-bottom-1 after:left-0
                             after:h-0.5 after:w-full after:bg-white/50
                             after:transition-all after:duration-300
                             hover:after:h-full">
                     validate 1
-                </RouterLink>
+                </router-link>
                 </li>
                 <li class="relative">
-                  <RouterLink to="/validate2" class="text-sm text-white hover:text-white/80
+                  <router-link to="/validate2" class="text-sm text-white hover:text-white/80
                             after:absolute after:-bottom-1 after:left-0
                             after:h-0.5 after:w-full after:bg-white/50
                             after:transition-all after:duration-300
                             hover:after:h-full">
                     validate 2
-                </RouterLink>
+                </router-link>
                 </li>
                 <li class="relative">
-                    <RouterLink to="/validate3" class="text-sm text-white hover:text-white/80
+                    <router-link to="/validate3" class="text-sm text-white hover:text-white/80
                             after:absolute after:-bottom-1 after:left-0
                             after:h-0.5 after:w-full after:bg-white/50
                             after:transition-all after:duration-300
                             hover:after:h-full">
                         validate 3
-                    </RouterLink>
+                    </router-link>
                 </li>
+                <li class="relative">
+                    <router-link to="/validate4" class="text-sm text-white hover:text-white/80
+                            after:absolute after:-bottom-1 after:left-0
+                            after:h-0.5 after:w-full after:bg-white/50
+                            after:transition-all after:duration-300
+                            hover:after:h-full">
+                        validate 4
+                    </router-link>
+                </li>
+                <li class="relative">
+                    <router-link to="/validate5" class="text-sm text-white hover:text-white/80
+                            after:absolute after:-bottom-1 after:left-0
+                            after:h-0.5 after:w-full after:bg-white/50
+                            after:transition-all after:duration-300
+                            hover:after:h-full">
+                        validate 5
+                    </router-link>
+                </li>
+                <!-- <li class="relative">
+                    <router-link to="/validate6" class="text-sm text-white hover:text-white/80
+                            after:absolute after:-bottom-1 after:left-0
+                            after:h-0.5 after:w-full after:bg-white/50
+                            after:transition-all after:duration-300
+                            hover:after:h-full">
+                        validate 6
+                    </router-link>
+                </li>
+                <li class="relative">
+                    <router-link to="/validate7" class="text-sm text-white hover:text-white/80
+                            after:absolute after:-bottom-1 after:left-0
+                            after:h-0.5 after:w-full after:bg-white/50
+                            after:transition-all after:duration-300
+                            hover:after:h-full">
+                        validate 7
+                    </router-link>
+                </li>
+                <li class="relative">
+                    <router-link to="/validate8" class="text-sm text-white hover:text-white/80
+                            after:absolute after:-bottom-1 after:left-0
+                            after:h-0.5 after:w-full after:bg-white/50
+                            after:transition-all after:duration-300
+                            hover:after:h-full">
+                        validate 8
+                    </router-link>
+                </li> -->
             </ul>
           </div>
         </div> 
