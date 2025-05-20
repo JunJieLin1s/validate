@@ -1,39 +1,92 @@
 <script setup lang="ts">
-    // import { ref } from 'vue'
-    import { Field, Form, ErrorMessage } from 'vee-validate'
-    
-    const onSubmit = (value: any) => {
-        console.log('Submitted Email: ', value)
-        console.log(JSON.stringify(value, null, 2));
-    }
+import { Field, Form, ErrorMessage } from 'vee-validate'
+import { useForm } from 'vee-validate';
+import * as yup from 'yup';
+import { toTypedSchema } from '@vee-validate/yup';
 
-    const validateEmail = (value: any) => {
-        
-        if(!value) {
-            return 'Email is required'
-        }
+const onSubmit = (value: any) => {
+    console.log('Submitted Email: ', value)
+    console.log(JSON.stringify(value, null, 2));
+}
 
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-        if (!emailRegex.test(value)) {
-        return 'This field must be a valid email';
-      }
 
-        return true;
-    }
+const { errors, defineField } = useForm({
+    validationSchema: toTypedSchema(
+        yup.object({
+            name: yup.string().required('Name is required'),
+            email: yup.string().email('Email is invalid').required('email is verplicht'),
+            password: yup.string().min(6, 'Wachtwoord moet minimaal 6 karakters zijn').required('Wachtwoord is verplicht'),
+            textarea: yup.string().required('Textarea is verplicht'),
+            select: yup.string().required('Select is verplicht'),
+            checkbox: yup.boolean().oneOf([true], 'checkbox is verplicht'),
+            radio: yup.string().required('Radio is verplicht'),
+            age: yup.number().required('Age is verplicht').positive('Age moet een positief getal zijn').integer('Age moet een heel getal zijn'),
+        })
+    )
+})
+
+const [name, nameAttrs] = defineField('name');
+const [email, emailAttrs] = defineField('email');
+const [password, passwordAttrs] = defineField('password');
+const [textarea, textareaAttrs] = defineField('textarea');
+const [select, selectAttrs] = defineField('select');
+const [checkbox, checkboxAttrs] = defineField('checkbox');
+const [radio, radioAttrs] = defineField('radio');
+const [age, ageAttrs] = defineField('age');
 
 </script>
-<template>
-    <h1>
-        Validate
-    </h1>
-    <Form class="flex flex-col" 
-        @submit="onSubmit"
-        >
-        <Field class="border-b-1" type="email" name="email" placeholder="Email" :rules="validateEmail" />
-        <ErrorMessage name="email" class="text-red-500" />
-        
-        <button type="submit">Sign up for newsletter</button>
-    </Form>
 
+<template>
+    <h1 class="text-3xl font-bold underline text-center mb-3 text-blue-500 mt-4 ">
+        Form validate 
+    </h1>
+    <Form class="flex flex-col w-1/2 mx-auto bg-white p-6 rounded shadow-md"
+        @submit="onSubmit"
+    >
+        <label for="name" class="text-lg font-bold mb-2">Name</label>
+        <Field type="text" name="name" placeholder="Name" v-model="name" v-bind="nameAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
+        <!-- <errorMessages name="name" class="text-red-500" /> -->
+        <pre class="text-red-500 text-sm">{{ errors.name }}</pre>
+        
+        
+        <label for="email" class="text-lg font-bold mb-2">Email</label>
+        <Field type="email" name="email" placeholder="Email" v-model="email" v-bind="emailAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
+        <pre class="text-red-500 text-sm">{{ errors.email }}</pre>
+        
+        <label for="password" class="text-lg font-bold mb-2">Password</label>
+        <Field type="password" name="password" placeholder="Password" v-model="password" v-bind="passwordAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
+        <pre class="text-red-500 text-sm">{{ errors.password }}</pre>
+        
+        <label for="textarea" class="text-lg font-bold mb-2">Bio</label>
+        <Field type="textarea" name="textarea" placeholder="textarea" v-model="textarea" v-bind="textareaAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
+        <pre class="text-red-500 text-sm">{{ errors.textarea }}</pre>
+        
+        <label for="select" class="text-lg font-bold mb-2">Selecteer een land</label>
+        <Field as="select" name="select" v-model="select" v-bind="selectAttrs" class="border-b-2 border-blue-500 p-2 mb-3">
+            <option value="" disabled>Selecteer een land</option>
+            <option value="NL">Nederland</option>
+            <option value="BE">Belgie</option>
+            <option value="DE">Duitsland</option>
+            <option value="FR">Frankrijk</option>
+            <option value="PL">Polen</option>
+        </Field>
+        <pre class="text-red-500">{{ errors.select }}</pre>
+        
+        <label for="checkbox" class="text-lg font-bold mb-2">I agree to the terms and conditions</label>
+        <Field type="checkbox" name="checkbox" v-model="checkbox" v-bind="checkboxAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
+        <pre class="text-red-500 text-sm">{{ errors.checkbox }}</pre>
+        
+        <label for="radio" class="text-lg font-bold mb-2">Hoe wilt u bereikt worden?</label>
+        <Field type="radio" name="radio" value="Email" v-model="radio" v-bind="radioAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
+        <Field type="radio" name="radio" value="Phone" v-model="radio" v-bind="radioAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
+        <Field type="radio" name="radio" value="Personally" v-model="radio" v-bind="radioAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
+        <pre class="text-red-500 text-sm">{{ errors.radio }}</pre>
+        
+        <label for="Age" class="text-lg font-bold mb-2">Age</label>
+        <Field type="number" name="age" placeholder="Age" v-model="age" v-bind="ageAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
+        <pre class="text-red-500 text-sm">{{ errors.age }}</pre>
+                
+        <button type="submit" class="bg-blue-500 text-white font-bold py-2 mt-4 px-4 rounded hover:bg-blue-700 transition duration-300 ease-in-out">Submit</button>
+    </Form>
 
 </template>
