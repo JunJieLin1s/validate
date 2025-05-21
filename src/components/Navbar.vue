@@ -23,7 +23,7 @@
                     validate 1
                 </router-link>
                 </li>
-                <li class="relative">
+                <!-- <li class="relative">
                   <router-link to="/validate2" class="text-sm text-white hover:text-white/80
                             after:absolute after:-bottom-1 after:left-0
                             after:h-0.5 after:w-full after:bg-white/50
@@ -57,8 +57,8 @@
                             after:transition-all after:duration-300
                             hover:after:h-full">
                         validate 5
-                    </router-link>
-                </li>
+                    </router-link> 
+                </li>-->
             </ul>
           </div>
         </div> 
