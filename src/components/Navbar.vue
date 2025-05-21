@@ -59,33 +59,6 @@
                         validate 5
                     </router-link>
                 </li>
-                <!-- <li class="relative">
-                    <router-link to="/validate6" class="text-sm text-white hover:text-white/80
-                            after:absolute after:-bottom-1 after:left-0
-                            after:h-0.5 after:w-full after:bg-white/50
-                            after:transition-all after:duration-300
-                            hover:after:h-full">
-                        validate 6
-                    </router-link>
-                </li>
-                <li class="relative">
-                    <router-link to="/validate7" class="text-sm text-white hover:text-white/80
-                            after:absolute after:-bottom-1 after:left-0
-                            after:h-0.5 after:w-full after:bg-white/50
-                            after:transition-all after:duration-300
-                            hover:after:h-full">
-                        validate 7
-                    </router-link>
-                </li>
-                <li class="relative">
-                    <router-link to="/validate8" class="text-sm text-white hover:text-white/80
-                            after:absolute after:-bottom-1 after:left-0
-                            after:h-0.5 after:w-full after:bg-white/50
-                            after:transition-all after:duration-300
-                            hover:after:h-full">
-                        validate 8
-                    </router-link>
-                </li> -->
             </ul>
           </div>
         </div> 

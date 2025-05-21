@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { Field, Form, ErrorMessage } from 'vee-validate'
-import { useForm } from 'vee-validate';
+import { Field, Form, useForm } from 'vee-validate'
 import * as yup from 'yup';
 import { toTypedSchema } from '@vee-validate/yup';
-
 
 const { errors, handleSubmit, defineField } = useForm({
     validationSchema: toTypedSchema(
@@ -28,7 +26,6 @@ const [bio, bioAttrs] = defineField('bio');
 const [select, selectAttrs] = defineField('select');
 const [radio, radioAttrs] = defineField('radio');
 const [checkbox, checkboxAttrs] = defineField('checkbox');
-
 
 const onSubmit = handleSubmit(value => {
     console.log(value);
