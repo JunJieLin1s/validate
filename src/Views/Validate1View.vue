@@ -11,24 +11,23 @@ const { errors, handleSubmit, defineField } = useForm({
             name: yup.string().required('Naam is verplicht'),
             email: yup.string().email('Email is onjuist').required('email is verplicht'),
             password: yup.string().min(6, 'Wachtwoord moet minimaal 6 karakters zijn').required('Wachtwoord is verplicht'),
-            textarea: yup.string().required('Textarea is verplicht'),
-            select: yup.string().required('Select is verplicht'),
-            checkbox: yup.boolean().oneOf([true], 'checkbox is verplicht'),
-            radio: yup.string().required('Radio is verplicht'),
             age: yup.number().required('Age is verplicht').positive('Age moet een positief getal zijn').integer('Age moet een heel getal zijn'),
+            bio: yup.string().required('Bio is verplicht'),
+            select: yup.string().required('Select is verplicht'),
+            radio: yup.string().required('Radio is verplicht'),
+            checkbox: yup.boolean().oneOf([true], 'checkbox is verplicht').required('Agree to terms and conditions is verplicht'),
         })
     )
 })
 
-    
 const [name, nameAttrs] = defineField('name');
 const [email, emailAttrs] = defineField('email');
 const [password, passwordAttrs] = defineField('password');
-const [textarea, textareaAttrs] = defineField('textarea');
-const [select, selectAttrs] = defineField('select');
-const [checkbox, checkboxAttrs] = defineField('checkbox');
-const [radio, radioAttrs] = defineField('radio');
 const [age, ageAttrs] = defineField('age');
+const [bio, bioAttrs] = defineField('bio');
+const [select, selectAttrs] = defineField('select');
+const [radio, radioAttrs] = defineField('radio');
+const [checkbox, checkboxAttrs] = defineField('checkbox');
 
 
 const onSubmit = handleSubmit(value => {
@@ -62,9 +61,11 @@ const onSubmit = handleSubmit(value => {
         <Field type="number" name="age" placeholder="Age" v-model="age" v-bind="ageAttrs" class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-1' : 'mb-4'" />
         <pre class="text-red-500 text-sm mb-5">{{ errors.age }}</pre>
 
-        <label for="textarea" class="text-lg font-bold mb-2">Bio</label>
-        <Field type="textarea" name="textarea" placeholder="textarea" v-model="textarea" v-bind="textareaAttrs" class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-1' : 'mb-4'"/>
-        <pre class="text-red-500 text-sm mb-5">{{ errors.textarea }}</pre>
+        <label for="bio" class="text-lg font-bold mb-2">Bio</label>
+        <textarea type="textarea" name="bio" placeholder="bio" v-model="bio" v-bind="bioAttrs" 
+            rows="3" cols="30"
+            class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-1' : 'mb-4'"/>
+        <pre class="text-red-500 text-sm mb-5">{{ errors.bio }}</pre>
         
         <label for="select" class="text-lg font-bold mb-2">Selecteer een land</label>
         <Field as="select" name="select" v-model="select" v-bind="selectAttrs" class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-2' : 'mb-3'">
@@ -89,11 +90,10 @@ const onSubmit = handleSubmit(value => {
         <pre class="text-red-500 text-sm mb-5">{{ errors.radio }}</pre>
         
         <div class="flex items-center" :class="errors.select ? 'mb-1' : 'mb-4'">
-            <Field type="checkbox" name="checkbox" v-model="checkbox" v-bind="checkboxAttrs" class="border-b-2 border-blue-500 mr-3" />
+            <Field type="checkbox" value="true" name="checkbox" v-model="checkbox" v-bind="checkboxAttrs" class="border-b-2 border-blue-500 mr-3" />
             <label for="checkbox" class="">I agree to the terms and conditions</label>
-            <pre class="text-red-500 text-sm mb-5">{{ errors.checkbox }}</pre>
         </div>
-        
+        <pre class="text-red-500 text-sm mb-5">{{ errors.checkbox }}</pre>
 
         <button class="bg-blue-500 text-white font-bold py-2 mt-4 px-4 rounded hover:bg-blue-700 transition duration-300 ease-in-out">Submit</button>
     </Form>
