@@ -12,7 +12,6 @@
               VALIDATE
             </h1>
   
-            <!-- Desktop links ----------------------------------------->
             <ul class="hidden sm:flex items-center space-x-6">
                 <li class="relative">
                     <router-link to="/" class="text-sm text-white hover:text-white/80
@@ -23,16 +22,16 @@
                     ValidateOpdrachtView
                 </router-link>
                 </li>
-                <!-- <li class="relative">
+                 <li class="relative">
                   <router-link to="/validate2" class="text-sm text-white hover:text-white/80
                             after:absolute after:-bottom-1 after:left-0
                             after:h-0.5 after:w-full after:bg-white/50
                             after:transition-all after:duration-300
                             hover:after:h-full">
-                    validate 2
+                    validate met useField
                 </router-link>
-                </li>
-                <li class="relative">
+               </li>
+               <!--  <li class="relative">
                     <router-link to="/validate3" class="text-sm text-white hover:text-white/80
                             after:absolute after:-bottom-1 after:left-0
                             after:h-0.5 after:w-full after:bg-white/50
