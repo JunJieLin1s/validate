@@ -20,7 +20,7 @@
                             after:h-0.5 after:w-full after:bg-white/50
                             after:transition-all after:duration-300
                             hover:after:h-full">
-                    validate 1
+                    ValidateOpdrachtView
                 </router-link>
                 </li>
                 <!-- <li class="relative">
