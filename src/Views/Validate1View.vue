@@ -4,17 +4,12 @@ import { useForm } from 'vee-validate';
 import * as yup from 'yup';
 import { toTypedSchema } from '@vee-validate/yup';
 
-const onSubmit = (value: any) => {
-    console.log('Submitted Email: ', value)
-    console.log(JSON.stringify(value, null, 2));
-}
 
-
-const { errors, defineField } = useForm({
+const { errors, handleSubmit, defineField } = useForm({
     validationSchema: toTypedSchema(
         yup.object({
-            name: yup.string().required('Name is required'),
-            email: yup.string().email('Email is invalid').required('email is verplicht'),
+            name: yup.string().required('Naam is verplicht'),
+            email: yup.string().email('Email is onjuist').required('email is verplicht'),
             password: yup.string().min(6, 'Wachtwoord moet minimaal 6 karakters zijn').required('Wachtwoord is verplicht'),
             textarea: yup.string().required('Textarea is verplicht'),
             select: yup.string().required('Select is verplicht'),
@@ -25,6 +20,7 @@ const { errors, defineField } = useForm({
     )
 })
 
+    
 const [name, nameAttrs] = defineField('name');
 const [email, emailAttrs] = defineField('email');
 const [password, passwordAttrs] = defineField('password');
@@ -34,6 +30,12 @@ const [checkbox, checkboxAttrs] = defineField('checkbox');
 const [radio, radioAttrs] = defineField('radio');
 const [age, ageAttrs] = defineField('age');
 
+
+const onSubmit = handleSubmit(value => {
+    console.log(value);
+    console.log(JSON.stringify(value, null, 2));
+})
+
 </script>
 
 <template>
@@ -41,28 +43,31 @@ const [age, ageAttrs] = defineField('age');
         Form validate 
     </h1>
     <Form class="flex flex-col w-1/2 mx-auto bg-white p-6 rounded shadow-md"
-        @submit="onSubmit"
+        @submit="onSubmit()"
     >
         <label for="name" class="text-lg font-bold mb-2">Name</label>
-        <Field type="text" name="name" placeholder="Name" v-model="name" v-bind="nameAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
-        <!-- <errorMessages name="name" class="text-red-500" /> -->
-        <pre class="text-red-500 text-sm">{{ errors.name }}</pre>
+        <Field type="text" name="name" placeholder="Name" v-model="name" v-bind="nameAttrs" class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-1' : 'mb-4'" />
+        <pre class="text-red-500 text-sm mb-5">{{ errors.name }}</pre>
         
         
         <label for="email" class="text-lg font-bold mb-2">Email</label>
-        <Field type="email" name="email" placeholder="Email" v-model="email" v-bind="emailAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
-        <pre class="text-red-500 text-sm">{{ errors.email }}</pre>
+        <Field type="email" name="email" placeholder="Email" v-model="email" v-bind="emailAttrs" class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-1' : 'mb-4'" />
+        <pre class="text-red-500 text-sm mb-5">{{ errors.email }}</pre>
         
         <label for="password" class="text-lg font-bold mb-2">Password</label>
-        <Field type="password" name="password" placeholder="Password" v-model="password" v-bind="passwordAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
-        <pre class="text-red-500 text-sm">{{ errors.password }}</pre>
+        <Field type="password" name="password" placeholder="Password" v-model="password" v-bind="passwordAttrs" class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-1' : 'mb-4'" />
+        <pre class="text-red-500 text-sm mb-5">{{ errors.password }}</pre>
         
+        <label for="Age" class="text-lg font-bold mb-2">Age</label>
+        <Field type="number" name="age" placeholder="Age" v-model="age" v-bind="ageAttrs" class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-1' : 'mb-4'" />
+        <pre class="text-red-500 text-sm mb-5">{{ errors.age }}</pre>
+
         <label for="textarea" class="text-lg font-bold mb-2">Bio</label>
-        <Field type="textarea" name="textarea" placeholder="textarea" v-model="textarea" v-bind="textareaAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
-        <pre class="text-red-500 text-sm">{{ errors.textarea }}</pre>
+        <Field type="textarea" name="textarea" placeholder="textarea" v-model="textarea" v-bind="textareaAttrs" class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-1' : 'mb-4'"/>
+        <pre class="text-red-500 text-sm mb-5">{{ errors.textarea }}</pre>
         
         <label for="select" class="text-lg font-bold mb-2">Selecteer een land</label>
-        <Field as="select" name="select" v-model="select" v-bind="selectAttrs" class="border-b-2 border-blue-500 p-2 mb-3">
+        <Field as="select" name="select" v-model="select" v-bind="selectAttrs" class="border-b-2 border-blue-500 p-2" :class="errors.select ? 'mb-2' : 'mb-3'">
             <option value="" disabled>Selecteer een land</option>
             <option value="NL">Nederland</option>
             <option value="BE">Belgie</option>
@@ -70,23 +75,27 @@ const [age, ageAttrs] = defineField('age');
             <option value="FR">Frankrijk</option>
             <option value="PL">Polen</option>
         </Field>
-        <pre class="text-red-500">{{ errors.select }}</pre>
-        
-        <label for="checkbox" class="text-lg font-bold mb-2">I agree to the terms and conditions</label>
-        <Field type="checkbox" name="checkbox" v-model="checkbox" v-bind="checkboxAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
-        <pre class="text-red-500 text-sm">{{ errors.checkbox }}</pre>
+        <pre class="text-red-500 text-sm mb-5">{{ errors.select }}</pre>
         
         <label for="radio" class="text-lg font-bold mb-2">Hoe wilt u bereikt worden?</label>
-        <Field type="radio" name="radio" value="Email" v-model="radio" v-bind="radioAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
-        <Field type="radio" name="radio" value="Phone" v-model="radio" v-bind="radioAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
-        <Field type="radio" name="radio" value="Personally" v-model="radio" v-bind="radioAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
-        <pre class="text-red-500 text-sm">{{ errors.radio }}</pre>
+        <div class="flex items-center" :class="errors.select ? 'mb-1' : 'mb-4'">
+            <Field type="radio" name="radio" value="Email" v-model="radio" v-bind="radioAttrs" class="mr-2 border-b-2 border-blue-500" />
+            <label for="email" class="mr-4">Email</label>
+            <Field type="radio" name="radio" value="Phone" v-model="radio" v-bind="radioAttrs" class="mr-2 border-b-2 border-blue-500" />
+            <label for="email" class="mr-4">Telefoon</label>
+            <Field type="radio" name="radio" value="Personally" v-model="radio" v-bind="radioAttrs" class="mr-2 border-b-2 border-blue-500" />
+            <label for="email" class="mr-4">Persoonlijk</label>
+        </div>  
+        <pre class="text-red-500 text-sm mb-5">{{ errors.radio }}</pre>
         
-        <label for="Age" class="text-lg font-bold mb-2">Age</label>
-        <Field type="number" name="age" placeholder="Age" v-model="age" v-bind="ageAttrs" class="border-b-2 border-blue-500 p-2 mb-3" />
-        <pre class="text-red-500 text-sm">{{ errors.age }}</pre>
-                
-        <button type="submit" class="bg-blue-500 text-white font-bold py-2 mt-4 px-4 rounded hover:bg-blue-700 transition duration-300 ease-in-out">Submit</button>
+        <div class="flex items-center" :class="errors.select ? 'mb-1' : 'mb-4'">
+            <Field type="checkbox" name="checkbox" v-model="checkbox" v-bind="checkboxAttrs" class="border-b-2 border-blue-500 mr-3" />
+            <label for="checkbox" class="">I agree to the terms and conditions</label>
+            <pre class="text-red-500 text-sm mb-5">{{ errors.checkbox }}</pre>
+        </div>
+        
+
+        <button class="bg-blue-500 text-white font-bold py-2 mt-4 px-4 rounded hover:bg-blue-700 transition duration-300 ease-in-out">Submit</button>
     </Form>
 
 </template>
