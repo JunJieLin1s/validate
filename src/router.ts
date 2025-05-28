@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
+import AlertTestView from './views/AlertTestView.vue'
 import ValidateOpdrachtView from './views/ValidateOpdrachtView.vue.vue'
 import Validate2View from './views/Validate2View.vue'
 import Validate3View from './views/Validate3View.vue'
@@ -7,6 +8,8 @@ import Validate4View from './views/Validate4View.vue'
 import Validate5View from './views/Validate5View.vue'
 
 const routes = [
+  { path: '/alerttest', name: 'AlertTestView', component: AlertTestView },
+  
   { path: '/', name: 'ValidateOpdrachtView', component: ValidateOpdrachtView },
   { path: '/validate2', name: 'Validatie2', component: Validate2View },
   { path: '/validate3', name: 'Validatie3', component: Validate3View },

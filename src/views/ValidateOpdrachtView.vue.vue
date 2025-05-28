@@ -94,5 +94,4 @@ const onSubmit = handleSubmit(value => {
 
         <button class="bg-blue-500 text-white font-bold py-2 mt-4 px-4 rounded hover:bg-blue-700 transition duration-300 ease-in-out">Submit</button>
     </Form>
-
 </template>
