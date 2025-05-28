@@ -83,4 +83,4 @@ import { AlertType, AlertSize } from '@/components/VAlert/VAlert.types';
             </VAlert>
         </div>
     </div>
-</template>
+</template>.

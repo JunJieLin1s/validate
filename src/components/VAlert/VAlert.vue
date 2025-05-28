@@ -1,39 +1,31 @@
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
-import { cva } from 'class-variance-authority';
-import { AlertType, AlertSize } from './VAlert.types'
+import { computed, useAttrs } from 'vue'
+import { alertCva } from './VAlert.cva'
 import type { VAlertProps } from './VAlert.types'
+import { AlertType, AlertSize } from './VAlert.types'
 
 const props = withDefaults(defineProps<VAlertProps>(), {
-    type: AlertType.info,
-    outlined: false,
-    disabled: false
+  type: AlertType.info,
+  size: AlertSize.medium,
+  outlined: false,
+  disabled: false,
 })
 
-const alertCva = cva('p-4 rounded-md border-2', {
-    variants: {
-        type: {
-            info: 'bg-blue-50 border-blue-300 text-blue-700',
-            success: 'bg-green-50 border-green-300 text-green-700',
-            warning: 'bg-yellow-50 border-yellow-300 text-yellow-700',
-            error: 'bg-red-50 border-red-300 text-red-700',
-        }
-    },
-    defaultVariants: {
-        type: 'info'
-    }
-})
+const attrs = useAttrs()
 
 const alertClasses = computed(() => {
-    return alertCva({ type: props.type })
+  return alertCva({
+    type: props.type,
+    size: props.size,
+    outlined: props.outlined,
+    disabled: typeof attrs.disabled !== 'undefined' && attrs.disabled !== false,
+  })
 })
 </script>
 
 <template>
-    <div :class="alertClasses">
-        <div>  
-            <h5 v-if="title" class="font-semibold mb-2">{{ title }}</h5>
-            <slot />
-        </div>
-    </div>
+  <div :class="alertClasses">
+    <h5 v-if="title" class="font-semibold">{{ title }}</h5>
+    <slot />
+  </div>
 </template>
