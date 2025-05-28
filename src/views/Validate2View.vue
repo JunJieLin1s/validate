@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { useField, useForm, Form, Field } from 'vee-validate';;
+import { useField, useForm, Form, Field } from 'vee-validate';
 import * as yup from 'yup';
 import { toTypedSchema } from '@vee-validate/yup';
-
 
 const schema = yup.object({
     name: yup.string().required('Naam is verplicht'),
     email: yup.string().email('Email is onjuist').required('email is verplicht'),
     password: yup.string().min(6, 'Wachtwoord moet minimaal 6 karakters zijn').required('Wachtwoord is verplicht'),
-    age: yup.number().required('Age is verplicht').positive('Age moet een positief getal zijn').integer('Age moet een heel getal zijn'),
+    age: yup.number().required('Age is verplicht').positive('Age moet een positief getal zijn').integer('Age moet een heel getal zijn').min(18, 'Je moet ouder zijn dan 18 jaar').max(60, 'Je jonger zijn dan 60 jaar'),
     bio: yup.string().required('Bio is verplicht'),
     select: yup.string().required('Select is verplicht'),
     radio: yup.string().required('Radio is verplicht'),
