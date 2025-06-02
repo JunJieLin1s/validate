@@ -40,33 +40,6 @@
                     Alert Test
                 </router-link>
                </li>
-               <!--  <li class="relative">
-                    <router-link to="/validate3" class="text-sm text-white hover:text-white/80
-                            after:absolute after:-bottom-1 after:left-0
-                            after:h-0.5 after:w-full after:bg-white/50
-                            after:transition-all after:duration-300
-                            hover:after:h-full">
-                        validate 3
-                    </router-link>
-                </li>
-                <li class="relative">
-                    <router-link to="/validate4" class="text-sm text-white hover:text-white/80
-                            after:absolute after:-bottom-1 after:left-0
-                            after:h-0.5 after:w-full after:bg-white/50
-                            after:transition-all after:duration-300
-                            hover:after:h-full">
-                        validate 4
-                    </router-link>
-                </li>
-                <li class="relative">
-                    <router-link to="/validate5" class="text-sm text-white hover:text-white/80
-                            after:absolute after:-bottom-1 after:left-0
-                            after:h-0.5 after:w-full after:bg-white/50
-                            after:transition-all after:duration-300
-                            hover:after:h-full">
-                        validate 5
-                    </router-link> 
-                </li>-->
             </ul>
           </div>
         </div> 
